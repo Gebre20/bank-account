@@ -10,12 +10,13 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 
-@AllArgsConstructor
-@RequiredArgsConstructor
+
+@Entity
+@Table(name = "users")
 @Getter
 @Setter
-@Entity
-@Table(name = "user")
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class User {
     
     @Id

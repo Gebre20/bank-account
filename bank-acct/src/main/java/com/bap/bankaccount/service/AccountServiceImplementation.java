@@ -6,9 +6,10 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.bap.bankaccount.entity.Account;
+import com.bap.bankaccount.entity.Customer;
 import com.bap.bankaccount.exception.EntityNotFoundException;
 import com.bap.bankaccount.repository.AccountRepository;
-
+import com.bap.bankaccount.repository.CustomerRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 public class AccountServiceImplementation implements AccountService{
 
     private AccountRepository accountRepository;
+    private CustomerRepository customerRepository;
 
     @Override
     public Account getAccountById(Long id) {
@@ -25,15 +27,15 @@ public class AccountServiceImplementation implements AccountService{
       return unwrapUser(account, id);
     }
 
-   
-
     @Override
     public List<Account> getAccounts() {
         return (List<Account>) accountRepository.findAll();
     }
 
     @Override
-    public Account saveAccount(Account account) {
+    public Account saveAccount(Account account, Long customerId) {
+        Customer customer = CustomerServiceImplementation.unwrapUser(customerRepository.findById(customerId), customerId);
+        account.setCustomer(customer);
        return accountRepository.save(account);
     }
 

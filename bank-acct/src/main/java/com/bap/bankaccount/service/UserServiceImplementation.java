@@ -12,15 +12,14 @@ import com.bap.bankaccount.repository.UserRepository;
 
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Service
 public class UserServiceImplementation implements UserService{
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Override
     public User getUser(Long id) {
@@ -37,8 +36,8 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public User saveUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-       return userRepository.save(user);
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            return userRepository.save(user);   
     }
 
     static User unwrapUser(Optional<User> entity, Long id) {

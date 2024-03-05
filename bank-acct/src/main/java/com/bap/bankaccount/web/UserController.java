@@ -3,6 +3,7 @@ package com.bap.bankaccount.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/user")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     
     UserService userService;
@@ -33,4 +35,9 @@ public class UserController {
 		userService.saveUser(user);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
+	// @PostMapping("/login")
+	// public ResponseEntity<HttpStatus> loginUser(@Valid @RequestBody User user) {
+	// 	userService.saveUser(user);
+	// 	return new ResponseEntity<>(HttpStatus.CREATED);
+	// }
 }
